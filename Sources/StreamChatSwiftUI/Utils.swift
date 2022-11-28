@@ -27,9 +27,9 @@ public class Utils {
     public var messageIdBuilder: MessageIdBuilder
     public var sortReactions: (MessageReactionType, MessageReactionType) -> Bool
 
-    var messageCachingUtils = MessageCachingUtils()
-    var messageListDateUtils: MessageListDateUtils
-    var channelControllerFactory = ChannelControllerFactory()
+    public var messageCachingUtils = MessageCachingUtils()
+    public var messageListDateUtils: MessageListDateUtils
+    public var channelControllerFactory = ChannelControllerFactory()
 
     public init(
         dateFormatter: DateFormatter = .makeDefault(),
