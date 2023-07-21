@@ -8,17 +8,17 @@ import UIKit
 
 /// Caches messages related data to avoid accessing the database.
 /// Cleared on chat channel view dismiss or memory warning.
-class MessageCachingUtils {
+public class MessageCachingUtils {
 
-    private var messageAuthorMapping = [String: String]()
-    private var messageAuthors = [String: UserDisplayInfo]()
-    private var messageAttachments = [String: Bool]()
-    private var checkedMessageIds = Set<String>()
-    private var quotedMessageMapping = [String: ChatMessage]()
+    public var messageAuthorMapping = [String: String]()
+    public var messageAuthors = [String: UserDisplayInfo]()
+    public var messageAttachments = [String: Bool]()
+    public var checkedMessageIds = Set<String>()
+    public var quotedMessageMapping = [String: ChatMessage]()
 
-    var scrollOffset: CGFloat = 0
+    public var scrollOffset: CGFloat = 0
 
-    func authorId(for message: ChatMessage) -> String {
+    public func authorId(for message: ChatMessage) -> String {
         if let userDisplayInfo = userDisplayInfo(for: message) {
             return userDisplayInfo.id
         }
@@ -27,7 +27,7 @@ class MessageCachingUtils {
         return userDisplayInfo.id
     }
 
-    func authorName(for message: ChatMessage) -> String {
+    public func authorName(for message: ChatMessage) -> String {
         if let userDisplayInfo = userDisplayInfo(for: message) {
             return userDisplayInfo.name
         }
@@ -36,7 +36,7 @@ class MessageCachingUtils {
         return userDisplayInfo.name
     }
 
-    func authorImageURL(for message: ChatMessage) -> URL? {
+    public func authorImageURL(for message: ChatMessage) -> URL? {
         if let userDisplayInfo = userDisplayInfo(for: message) {
             return userDisplayInfo.imageURL
         }
@@ -45,7 +45,7 @@ class MessageCachingUtils {
         return userDisplayInfo.imageURL
     }
 
-    func authorInfo(from message: ChatMessage) -> UserDisplayInfo {
+    public func authorInfo(from message: ChatMessage) -> UserDisplayInfo {
         if let userDisplayInfo = userDisplayInfo(for: message) {
             return userDisplayInfo
         }
@@ -54,7 +54,7 @@ class MessageCachingUtils {
         return userDisplayInfo
     }
 
-    func quotedMessage(for message: ChatMessage) -> ChatMessage? {
+    public func quotedMessage(for message: ChatMessage) -> ChatMessage? {
         if checkedMessageIds.contains(message.id) {
             return nil
         }
@@ -73,7 +73,7 @@ class MessageCachingUtils {
         return quoted
     }
 
-    func userDisplayInfo(with id: String) -> UserDisplayInfo? {
+    public func userDisplayInfo(with id: String) -> UserDisplayInfo? {
         for userInfo in messageAuthors.values {
             if userInfo.id == id {
                 return userInfo
@@ -82,7 +82,7 @@ class MessageCachingUtils {
         return nil
     }
 
-    func clearCache() {
+    public func clearCache() {
         log.debug("Clearing cached message data")
         scrollOffset = 0
         messageAuthorMapping = [String: String]()
